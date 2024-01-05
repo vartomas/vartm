@@ -1,3 +1,1 @@
-export const testPackage = () => {
-  return 'Hello World!';
-};
+export * from './components';
