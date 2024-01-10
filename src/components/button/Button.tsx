@@ -1,15 +1,16 @@
-import React, { FC, ReactNode } from 'react';
-import styles from 'button.module.css';
+import React, { CSSProperties, FC, ReactNode } from 'react';
+import style from 'button.module.css';
 
 interface Props {
   title: ReactNode;
   className?: string;
+  styles?: CSSProperties;
   onClick?: () => void;
 }
 
-const Button: FC<Props> = ({ title, className, onClick }) => {
+const Button: FC<Props> = ({ title, className, styles, onClick }) => {
   return (
-    <button className={className ? styles.button : className} onClick={onClick}>
+    <button className={className ? style.button : className} style={styles} onClick={onClick}>
       {title}
     </button>
   );
