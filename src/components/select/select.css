@@ -1,15 +1,15 @@
-.dropdownContainer {
+.vartm-dropdownContainer {
   position: relative;
 }
 
-.input {
+.vartm-input {
   padding: 4px;
   border: 1px solid #ccc;
   font-size: 16px;
   cursor: pointer;
 }
 
-.dropdown {
+.vartm-dropdown {
   top: 2px;
   left: 0;
   right: 0;
@@ -20,11 +20,11 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.option {
+.vartm-option {
   padding: 8px;
   cursor: pointer;
 }
 
-.option:hover {
+.vartm-option:hover {
   background-color: #c41d1d;
 }
