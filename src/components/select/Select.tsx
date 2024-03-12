@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { SelectOption } from './types';
-import 'select.css';
+import style from 'select.module.css';
 
 interface Props {
   value: SelectOption | null;
@@ -34,14 +34,14 @@ const Select: FC<Props> = ({
 
   return (
     <div className={containerClassName}>
-      <div className={inputClassName ?? 'vartm-input'} onClick={() => setMenuOpen((prev) => !prev)}>
+      <div className={inputClassName ?? style.input} onClick={() => setMenuOpen((prev) => !prev)}>
         {value ? <span>{value.label}</span> : <span>{placeholder}</span>}
       </div>
-      <div className={dropdownContainerClassName ?? 'vartm-dropdownContainer'}>
+      <div className={dropdownContainerClassName ?? style.dropdownContainer}>
         {menuOpen && (
-          <div className={dropdownClassName ?? 'vartm-dropdown'}>
+          <div className={dropdownClassName ?? style.dropdown}>
             {options.map((option) => (
-              <div className={optionClassName ?? 'vartm-option'} onClick={() => handleSelect(option)}>
+              <div className={optionClassName ?? style.option} onClick={() => handleSelect(option)}>
                 {option.label}
               </div>
             ))}
