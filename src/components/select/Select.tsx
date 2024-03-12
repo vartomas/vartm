@@ -1,6 +1,5 @@
 import React, { FC, useState } from 'react';
 import { SelectOption } from './types';
-import selectStyle from 'select.module.css';
 
 interface Props {
   value: SelectOption | null;
@@ -34,14 +33,14 @@ const Select: FC<Props> = ({
 
   return (
     <div className={containerClassName}>
-      <div className={inputClassName ?? selectStyle.input} onClick={() => setMenuOpen((prev) => !prev)}>
+      <div className={inputClassName} onClick={() => setMenuOpen((prev) => !prev)}>
         {value ? <span>{value.label}</span> : <span>{placeholder}</span>}
       </div>
-      <div className={dropdownContainerClassName ?? selectStyle.dropdownContainer}>
+      <div className={dropdownContainerClassName}>
         {menuOpen && (
-          <div className={dropdownClassName ?? selectStyle.dropdown}>
+          <div className={dropdownClassName}>
             {options.map((option) => (
-              <div className={optionClassName ?? selectStyle.option} onClick={() => handleSelect(option)}>
+              <div className={optionClassName} onClick={() => handleSelect(option)}>
                 {option.label}
               </div>
             ))}
