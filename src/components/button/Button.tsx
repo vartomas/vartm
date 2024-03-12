@@ -1,5 +1,5 @@
 import React, { CSSProperties, FC, ReactNode } from 'react';
-import style from 'button.module.css';
+import buttonStyle from 'button.module.css';
 
 interface Props {
   title: ReactNode;
@@ -10,7 +10,7 @@ interface Props {
 
 const Button: FC<Props> = ({ title, className, styles, onClick }) => {
   return (
-    <button className={className ?? style.button} style={styles} onClick={onClick}>
+    <button className={className ?? buttonStyle.button} style={styles} onClick={onClick}>
       {title}
     </button>
   );
