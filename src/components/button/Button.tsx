@@ -10,7 +10,7 @@ interface Props {
 
 const Button: FC<Props> = ({ title, className, styles, onClick }) => {
   return (
-    <button className={className ? style.button : className} style={styles} onClick={onClick}>
+    <button className={className ?? style.button} style={styles} onClick={onClick}>
       {title}
     </button>
   );

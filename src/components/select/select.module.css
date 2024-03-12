@@ -1,0 +1,30 @@
+.dropdownContainer {
+  position: relative;
+}
+
+.input {
+  padding: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.dropdown {
+  top: 2px;
+  left: 0;
+  right: 0;
+  position: absolute;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.option {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background-color: #c41d1d;
+}
