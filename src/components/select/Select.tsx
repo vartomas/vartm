@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { SelectOption } from './types';
 
 interface Props {
@@ -22,7 +22,21 @@ const Select: FC<Props> = ({
   optionClassName,
   onChange,
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent): void => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  });
 
   const handleSelect = (option: SelectOption) => {
     setOpen(false);
@@ -30,7 +44,7 @@ const Select: FC<Props> = ({
   };
 
   return (
-    <div className={containerClassName}>
+    <div className={containerClassName} ref={containerRef}>
       <div className={inputClassName} onClick={() => setOpen((prev) => !prev)}>
         {value ? <span>{value.label}</span> : <span>{placeholder}</span>}
       </div>
