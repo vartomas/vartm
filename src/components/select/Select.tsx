@@ -24,20 +24,20 @@ const Select: FC<Props> = ({
   optionClassName,
   onChange,
 }) => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleSelect = (option: SelectOption) => {
-    setMenuOpen(false);
+    setOpen(false);
     onChange(option);
   };
 
   return (
     <div className={containerClassName}>
-      <div className={inputClassName} onClick={() => setMenuOpen((prev) => !prev)}>
+      <div className={inputClassName} onClick={() => setOpen((prev) => !prev)}>
         {value ? <span>{value.label}</span> : <span>{placeholder}</span>}
       </div>
       <div className={dropdownContainerClassName}>
-        {menuOpen && (
+        {open && (
           <div className={dropdownClassName}>
             {options.map((option) => (
               <div className={optionClassName} onClick={() => handleSelect(option)}>
