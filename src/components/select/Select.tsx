@@ -50,8 +50,8 @@ const Select: FC<Props> = ({
       </div>
       {open && (
         <div className={dropdownClassName}>
-          {options.map((option) => (
-            <div className={optionClassName} onClick={() => handleSelect(option)}>
+          {options.map((option, i) => (
+            <div key={`${option.label}-${i}`} className={optionClassName} onClick={() => handleSelect(option)}>
               {option.label}
             </div>
           ))}
