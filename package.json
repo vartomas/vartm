@@ -1,6 +1,6 @@
 {
   "name": "vartm",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "VarTM, component library for react",
   "scripts": {
     "build": "rollup -c"
