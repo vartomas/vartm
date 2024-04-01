@@ -10,6 +10,8 @@ interface Props {
   inputClassName?: string;
   dropdownClassName?: string;
   optionClassName?: string;
+  renderInput?: (value: SelectOption | null) => ReactElement;
+  renderOption?: (option: SelectOption) => ReactElement;
   onChange: (value: SelectOption) => void;
 }
 
@@ -21,21 +23,33 @@ const Select: FC<Props> = ({
   inputClassName,
   dropdownClassName,
   optionClassName,
+  renderInput,
+  renderOption,
   onChange,
 }) => {
   const { open, containerRef, setOpen, handleSelect } = useSelect(onChange);
 
   return (
     <div className={containerClassName} ref={containerRef}>
-      <div className={inputClassName} onClick={() => setOpen((prev) => !prev)}>
-        {value ? <span>{value.label}</span> : <span>{placeholder}</span>}
-      </div>
+      {renderInput ? (
+        renderInput(value)
+      ) : (
+        <div className={inputClassName} onClick={() => setOpen((prev) => !prev)}>
+          {value ? <span>{value.label}</span> : <span>{placeholder}</span>}
+        </div>
+      )}
       {open && (
         <div className={dropdownClassName}>
           {options.map((option, i) => (
-            <div key={`${option.label}-${i}`} className={optionClassName} onClick={() => handleSelect(option)}>
-              {option.label}
-            </div>
+            <>
+              {renderOption ? (
+                renderOption(option)
+              ) : (
+                <div key={`${option.label}-${i}`} className={optionClassName} onClick={() => handleSelect(option)}>
+                  {option.label}
+                </div>
+              )}
+            </>
           ))}
         </div>
       )}
