@@ -40,15 +40,15 @@ function Select<T extends {}>({
       {open && (
         <div className={dropdownClassName}>
           {options.map((option, i) => (
-            <>
+            <div key={`${option.label}-${i}`}>
               {renderOption ? (
                 renderOption(option)
               ) : (
-                <div key={`${option.label}-${i}`} className={optionClassName} onClick={() => handleSelect(option)}>
+                <div className={optionClassName} onClick={() => handleSelect(option)}>
                   {option.label}
                 </div>
               )}
-            </>
+            </div>
           ))}
         </div>
       )}
