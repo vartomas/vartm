@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
+import { SelectOption } from './types';
 
-export const useSelect = <T>(onChange: (value: { label: string; value: T }) => void) => {
+export const useSelect = <T>(onChange: (value: SelectOption<T>) => void) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
 
@@ -17,7 +18,7 @@ export const useSelect = <T>(onChange: (value: { label: string; value: T }) => v
     };
   });
 
-  const handleSelect = (option: { label: string; value: T }) => {
+  const handleSelect = (option: SelectOption<T>) => {
     setOpen(false);
     onChange(option);
   };

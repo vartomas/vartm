@@ -1,17 +1,18 @@
 import React, { ReactElement } from 'react';
 import { useSelect } from './useSelect';
+import { SelectOption } from './types';
 
 interface Props<T> {
-  value: { label: string; value: T } | null;
-  options: { label: string; value: T }[];
+  value: SelectOption<T> | null;
+  options: SelectOption<T>[];
   placeholder?: string;
   containerClassName?: string;
   inputClassName?: string;
   dropdownClassName?: string;
   optionClassName?: string;
-  renderInput?: (value: { label: string; value: T } | null) => ReactElement;
-  renderOption?: (option: { label: string; value: T }) => ReactElement;
-  onChange: (value: { label: string; value: T } | null) => void;
+  renderInput?: (value: SelectOption<T> | null) => ReactElement;
+  renderOption?: (option: SelectOption<T>) => ReactElement;
+  onChange: (value: SelectOption<T> | null) => void;
 }
 
 function Select<T extends {}>({
@@ -26,7 +27,7 @@ function Select<T extends {}>({
   renderOption,
   onChange,
 }: Props<T>): ReactElement {
-  const { open, containerRef, setOpen, handleSelect } = useSelect(onChange);
+  const { open, containerRef, setOpen, handleSelect } = useSelect<T>(onChange);
 
   return (
     <div className={containerClassName} ref={containerRef}>
