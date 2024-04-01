@@ -1,21 +1,20 @@
-import React, { FC, ReactElement, useEffect, useRef, useState } from 'react';
-import { SelectOption } from './types';
+import React, { ReactElement } from 'react';
 import { useSelect } from './useSelect';
 
-interface Props {
-  value: SelectOption | null;
-  options: SelectOption[];
+interface Props<T> {
+  value: { label: string; value: T };
+  options: { label: string; value: T }[];
   placeholder?: string;
   containerClassName?: string;
   inputClassName?: string;
   dropdownClassName?: string;
   optionClassName?: string;
-  renderInput?: (value: SelectOption | null) => ReactElement;
-  renderOption?: (option: SelectOption) => ReactElement;
-  onChange: (value: SelectOption) => void;
+  renderInput?: (value: { label: string; value: T } | null) => ReactElement;
+  renderOption?: (option: { label: string; value: T }) => ReactElement;
+  onChange: (value: { label: string; value: T }) => void;
 }
 
-const Select: FC<Props> = ({
+function Select<T extends {}>({
   value,
   options,
   placeholder = '',
@@ -26,7 +25,7 @@ const Select: FC<Props> = ({
   renderInput,
   renderOption,
   onChange,
-}) => {
+}: Props<T>): ReactElement {
   const { open, containerRef, setOpen, handleSelect } = useSelect(onChange);
 
   return (
@@ -55,6 +54,6 @@ const Select: FC<Props> = ({
       )}
     </div>
   );
-};
+}
 
 export default Select;
