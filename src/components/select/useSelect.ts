@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { SelectOption } from './types';
 
 export const useSelect = <T>(onChange: (value: { label: string; value: T }) => void) => {
   const containerRef = useRef<HTMLDivElement>(null);

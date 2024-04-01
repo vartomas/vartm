@@ -1,4 +1,4 @@
 export type SelectOption = {
-  value: {};
+  value: any;
   label: string;
 };
