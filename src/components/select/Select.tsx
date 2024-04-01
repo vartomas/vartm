@@ -35,7 +35,7 @@ const Select: FC<Props> = ({
         renderInput(value)
       ) : (
         <div className={inputClassName} onClick={() => setOpen((prev) => !prev)}>
-          {value ? <span>{value.label}</span> : <span>{placeholder}</span>}
+          {value ? <span>{value.label}</span> : <span style={{ opacity: 0.5 }}>{placeholder}</span>}
         </div>
       )}
       {open && (
