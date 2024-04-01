@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { useSelect } from './useSelect';
 
 interface Props<T> {
-  value: { label: string; value: T };
+  value: { label: string; value: T } | null;
   options: { label: string; value: T }[];
   placeholder?: string;
   containerClassName?: string;
@@ -11,7 +11,7 @@ interface Props<T> {
   optionClassName?: string;
   renderInput?: (value: { label: string; value: T } | null) => ReactElement;
   renderOption?: (option: { label: string; value: T }) => ReactElement;
-  onChange: (value: { label: string; value: T }) => void;
+  onChange: (value: { label: string; value: T } | null) => void;
 }
 
 function Select<T extends {}>({
