@@ -1,5 +1,6 @@
 import React, { FC, ReactElement, useEffect, useRef, useState } from 'react';
 import { SelectOption } from './types';
+import { useSelect } from './useSelect';
 
 interface Props {
   value: SelectOption | null;
@@ -12,7 +13,7 @@ interface Props {
   onChange: (value: SelectOption) => void;
 }
 
-function Select<T extends {}>({
+const Select: FC<Props> = ({
   value,
   options,
   placeholder = '',
@@ -21,27 +22,8 @@ function Select<T extends {}>({
   dropdownClassName,
   optionClassName,
   onChange,
-}: Props): ReactElement {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent): void => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
-        setOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  });
-
-  const handleSelect = (option: SelectOption) => {
-    setOpen(false);
-    onChange(option);
-  };
+}) => {
+  const { open, containerRef, setOpen, handleSelect } = useSelect(onChange);
 
   return (
     <div className={containerClassName} ref={containerRef}>
@@ -59,6 +41,6 @@ function Select<T extends {}>({
       )}
     </div>
   );
-}
+};
 
 export default Select;
