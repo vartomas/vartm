@@ -1,15 +1,15 @@
 import React, { FC, ReactElement, useEffect, useRef, useState } from 'react';
 import { SelectOption } from './types';
 
-interface Props<T> {
-  value: SelectOption<T> | null;
-  options: SelectOption<T>[];
+interface Props {
+  value: SelectOption | null;
+  options: SelectOption[];
   placeholder?: string;
   containerClassName?: string;
   inputClassName?: string;
   dropdownClassName?: string;
   optionClassName?: string;
-  onChange: (value: SelectOption<T>) => void;
+  onChange: (value: SelectOption) => void;
 }
 
 function Select<T extends {}>({
@@ -21,7 +21,7 @@ function Select<T extends {}>({
   dropdownClassName,
   optionClassName,
   onChange,
-}: Props<T>): ReactElement {
+}: Props): ReactElement {
   const containerRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
 
@@ -38,7 +38,7 @@ function Select<T extends {}>({
     };
   });
 
-  const handleSelect = (option: SelectOption<T>) => {
+  const handleSelect = (option: SelectOption) => {
     setOpen(false);
     onChange(option);
   };
