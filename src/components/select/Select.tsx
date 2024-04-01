@@ -7,7 +7,6 @@ interface Props {
   placeholder?: string;
   containerClassName?: string;
   inputClassName?: string;
-  dropdownContainerClassName?: string;
   dropdownClassName?: string;
   optionClassName?: string;
   onChange: (value: SelectOption) => void;
@@ -19,7 +18,6 @@ const Select: FC<Props> = ({
   placeholder = '',
   containerClassName,
   inputClassName,
-  dropdownContainerClassName,
   dropdownClassName,
   optionClassName,
   onChange,
@@ -36,17 +34,15 @@ const Select: FC<Props> = ({
       <div className={inputClassName} onClick={() => setOpen((prev) => !prev)}>
         {value ? <span>{value.label}</span> : <span>{placeholder}</span>}
       </div>
-      <div className={dropdownContainerClassName}>
-        {open && (
-          <div className={dropdownClassName}>
-            {options.map((option) => (
-              <div className={optionClassName} onClick={() => handleSelect(option)}>
-                {option.label}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+      {open && (
+        <div className={dropdownClassName}>
+          {options.map((option) => (
+            <div className={optionClassName} onClick={() => handleSelect(option)}>
+              {option.label}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
