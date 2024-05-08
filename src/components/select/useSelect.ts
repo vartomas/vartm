@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { SelectOption } from './types';
 
-export const useSelect = <T>(onChange: (value: SelectOption<T>) => void) => {
+export const useSelect = <T>(
+  multiple: boolean,
+  onChange: ((value: SelectOption<T> | null) => void) | ((value: SelectOption<T>[] | null) => void)
+) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
 
@@ -18,9 +21,9 @@ export const useSelect = <T>(onChange: (value: SelectOption<T>) => void) => {
     };
   });
 
-  const handleSelect = (option: SelectOption<T>) => {
-    setOpen(false);
-    onChange(option);
+  const handleSelect = (option: SelectOption<T> | SelectOption<T>[]) => {
+    setOpen((prev) => (multiple ? prev : false));
+    onChange(option as (SelectOption<T> & SelectOption<T>[]) | null);
   };
 
   return {

@@ -1,30 +1,39 @@
 import React, { ReactElement } from 'react';
 import { useSelect } from './useSelect';
-import { SelectProps } from './types';
+import { SelectOption, SelectProps, SelectPropsMultiple } from './types';
 
 function Select<T extends {}>({
+  multiple,
   value,
   options,
   placeholder = '',
   containerClassName,
   inputClassName,
+  tagClassName,
+  placeHolderClassName,
   dropdownClassName,
   optionClassName,
   renderInput,
   renderOption,
   onChange,
-}: SelectProps<T>): ReactElement {
-  const { open, containerRef, setOpen, handleSelect } = useSelect<T>(onChange);
+}: SelectProps<T> | SelectPropsMultiple<T>): ReactElement {
+  const { open, containerRef, setOpen, handleSelect } = useSelect<T>(multiple, onChange);
 
   return (
     <div className={containerClassName} ref={containerRef}>
       <div className={inputClassName} onClick={() => setOpen((prev) => !prev)}>
         {renderInput ? (
-          renderInput(value)
+          renderInput(value as (SelectOption<T> & SelectOption<T>[]) | null)
         ) : value ? (
-          <span>{value.label}</span>
+          multiple ? (
+            value.map((x) => <span className={tagClassName}>x.label</span>)
+          ) : (
+            <span className={tagClassName}>value.label</span>
+          )
         ) : (
-          <span style={{ opacity: 0.5 }}>{placeholder}</span>
+          <span style={{ opacity: 0.5 }} className={placeHolderClassName}>
+            {placeholder}
+          </span>
         )}
       </div>
       {open && (
