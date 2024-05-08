@@ -1,8 +1,8 @@
-import React, { ReactElement } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { useSelect } from './useSelect';
 import { SelectOption, SelectProps, SelectPropsMultiple } from './types';
 
-function Select<T extends {}>({
+const Select: FC<SelectProps | SelectPropsMultiple> = ({
   multiple,
   value,
   options,
@@ -16,14 +16,14 @@ function Select<T extends {}>({
   renderInput,
   renderOption,
   onChange,
-}: SelectProps<T> | SelectPropsMultiple<T>): ReactElement {
-  const { open, containerRef, setOpen, handleSelect } = useSelect<T>(multiple, onChange);
+}) => {
+  const { open, containerRef, setOpen, handleSelect } = useSelect(multiple, onChange);
 
   return (
     <div className={containerClassName} ref={containerRef}>
       <div className={inputClassName} onClick={() => setOpen((prev) => !prev)}>
         {renderInput ? (
-          renderInput(value as (SelectOption<T> & SelectOption<T>[]) | null)
+          renderInput(value as (SelectOption & SelectOption[]) | null)
         ) : value ? (
           multiple ? (
             value.map((x) => <span className={tagClassName}>x.label</span>)
@@ -49,6 +49,6 @@ function Select<T extends {}>({
       )}
     </div>
   );
-}
+};
 
 export default Select;
