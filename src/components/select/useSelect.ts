@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { SelectOption } from './types';
 
-export const useSelect = (
-  multiple: boolean,
-  onChange: ((value: SelectOption | null) => void) | ((value: SelectOption[] | null) => void)
+export const useSelect = <T>(
+  multiple: boolean | undefined,
+  onChange: ((value: SelectOption<T> | null) => void) | ((value: SelectOption<T>[] | null) => void)
 ) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
@@ -21,9 +21,9 @@ export const useSelect = (
     };
   });
 
-  const handleSelect = (option: SelectOption | SelectOption[]) => {
+  const handleSelect = (option: SelectOption<T> | SelectOption<T>[]) => {
     setOpen((prev) => (multiple ? prev : false));
-    onChange(option as (SelectOption & SelectOption[]) | null);
+    onChange(option as (SelectOption<T> & SelectOption<T>[]) | null);
   };
 
   return {

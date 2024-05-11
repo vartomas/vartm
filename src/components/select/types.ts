@@ -1,14 +1,14 @@
 import { ReactElement } from 'react';
 
-export type SelectOption = {
-  value: unknown;
+export type SelectOption<T> = {
+  value: T;
   label: string;
 };
 
-export interface SelectProps {
-  multiple: false;
-  value: SelectOption | null;
-  options: SelectOption[];
+export interface SelectProps<T> {
+  multiple?: false;
+  value: SelectOption<T> | null;
+  options: SelectOption<T>[];
   placeholder?: string;
   containerClassName?: string;
   inputClassName?: string;
@@ -16,15 +16,15 @@ export interface SelectProps {
   placeHolderClassName?: string;
   dropdownClassName?: string;
   optionClassName?: string;
-  renderInput?: (value: SelectOption | null) => ReactElement;
-  renderOption?: (option: SelectOption) => ReactElement;
-  onChange: (value: SelectOption | null) => void;
+  renderInput?: (value: SelectOption<T> | null) => ReactElement;
+  renderOption?: (option: SelectOption<T>) => ReactElement;
+  onChange: (value: SelectOption<T> | null) => void;
 }
 
-export interface SelectPropsMultiple {
+export interface SelectPropsMultiple<T> {
   multiple: true;
-  value: SelectOption[] | null;
-  options: SelectOption[];
+  value: SelectOption<T>[] | null;
+  options: SelectOption<T>[];
   placeholder?: string;
   containerClassName?: string;
   inputClassName?: string;
@@ -32,7 +32,7 @@ export interface SelectPropsMultiple {
   placeHolderClassName?: string;
   dropdownClassName?: string;
   optionClassName?: string;
-  renderInput?: (value: SelectOption[] | null) => ReactElement;
-  renderOption?: (option: SelectOption) => ReactElement;
-  onChange: (value: SelectOption[] | null) => void;
+  renderInput?: (value: SelectOption<T>[] | null) => ReactElement;
+  renderOption?: (option: SelectOption<T>) => ReactElement;
+  onChange: (value: SelectOption<T>[] | null) => void;
 }

@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import React from 'react';
 import { useSelect } from './useSelect';
 import { SelectOption, SelectProps, SelectPropsMultiple } from './types';
 
-const Select: FC<SelectProps | SelectPropsMultiple> = ({
+function Select<T>({
   multiple,
   value,
   options,
@@ -16,10 +16,10 @@ const Select: FC<SelectProps | SelectPropsMultiple> = ({
   renderInput,
   renderOption,
   onChange,
-}) => {
-  const { open, containerRef, setOpen, handleSelect } = useSelect(multiple, onChange);
+}: SelectProps<T> | SelectPropsMultiple<T>) {
+  const { open, containerRef, setOpen, handleSelect } = useSelect<T>(multiple, onChange);
 
-  const createValue = (selection: SelectOption) => {
+  const createValue = (selection: SelectOption<T>) => {
     if (multiple) {
       return value ? [...value, selection] : [selection];
     }
@@ -31,7 +31,7 @@ const Select: FC<SelectProps | SelectPropsMultiple> = ({
     <div className={containerClassName} ref={containerRef}>
       <div className={inputClassName} onClick={() => setOpen((prev) => !prev)}>
         {renderInput ? (
-          renderInput(value as (SelectOption & SelectOption[]) | null)
+          renderInput(value as (SelectOption<T> & SelectOption<T>[]) | null)
         ) : value ? (
           multiple ? (
             value.map((x) => <span className={tagClassName}>{x.label}</span>)
@@ -57,6 +57,6 @@ const Select: FC<SelectProps | SelectPropsMultiple> = ({
       )}
     </div>
   );
-};
+}
 
 export default Select;
